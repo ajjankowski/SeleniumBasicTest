@@ -90,6 +90,7 @@ public class HotelSearch {
         String noResultHeading = driver.findElement(By.xpath("//div[@class='itemscontainer']")).getText();
         Assert.assertEquals(noResultHeading, "No Results Found");
 
+
         driver.quit();
 
     }
