@@ -31,21 +31,27 @@ public class SignUp {
                 .findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
 
+        //Generate random email
+        int randomNumber = (int) (Math.random()*1000);
+        String email = "test" + randomNumber + "@test.pl";
+
         //Fill form
         String lastName = "Kowalski";
+        String password = "passWord12!";
         driver.findElement(By.name("firstname")).sendKeys("Jan");
         driver.findElement(By.name("lastname")).sendKeys(lastName);
         driver.findElement(By.name("phone")).sendKeys("123456789");
-        driver.findElement(By.name("email")).sendKeys("jan.kowalski6@test.pl");
-        driver.findElement(By.name("password")).sendKeys("passWord12!");
-        driver.findElement(By.name("confirmpassword")).sendKeys("passWord12!");
+        driver.findElement(By.name("email")).sendKeys(email);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("confirmpassword")).sendKeys(password);
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
 
+        //Assert results
         String heading = driver.findElement(By.xpath("//h3[@class='RTL']")).getText();
         Assert.assertTrue(heading.contains(lastName));
         Assert.assertEquals(heading, "Hi, Jan Kowalski");
 
-//        driver.quit();
+        driver.quit();
 
     }
 
