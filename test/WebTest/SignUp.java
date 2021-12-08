@@ -91,7 +91,7 @@ public class SignUp {
     }
 
     @Test
-    public void signUpWithWrongEmail() {
+    public void signUpInvalidEmail() {
         //False: visible test execution; True: Invisible tests execution
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -117,8 +117,14 @@ public class SignUp {
         driver.findElement(By.name("confirmpassword")).sendKeys(password);
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
 
-        String noDataAlert = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
-        Assert.assertEquals(noDataAlert, "The Email field must contain a valid email address.");
+//        String noDataAlert = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
+//        Assert.assertEquals(noDataAlert, "The Email field must contain a valid email address.");
+
+        List<String> errors = driver.findElements(By.xpath("//div[@class='alert alert-danger']//p")).stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(errors.contains("The Email field must contain a valid email address."));
 
         driver.quit();
 
