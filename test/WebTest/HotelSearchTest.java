@@ -13,19 +13,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class HotelSearch {
+public class HotelSearchTest extends BaseTest {
 
     @Test
-    public void searchHotel() {
-        //False: visible test execution; True: Invisible tests execution
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(false);
-        WebDriver driver = new ChromeDriver(options);
-
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+    public void searchHotelTest() {
+        setup();
 
         //City pick
         driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
@@ -64,22 +56,12 @@ public class HotelSearch {
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
         Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
-
-
-        driver.quit();
-
+        tearDown();
     }
 
     @Test
-    public void searchHotelwithoutName() {
-        //False: visible test execution; True: Invisible tests execution
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(false);
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+    public void searchHotelWithoutNameTest() {
+        setup();
 
         driver.findElement(By.name("checkin")).sendKeys("17/04/2025");
         driver.findElement(By.name("checkout")).sendKeys("20/04/2025");
@@ -89,11 +71,7 @@ public class HotelSearch {
 
         String noResultHeading = driver.findElement(By.xpath("//div[@class='itemscontainer']")).getText();
         Assert.assertEquals(noResultHeading, "No Results Found");
-
-
-        driver.quit();
-
+        tearDown();
     }
-
 }
 
