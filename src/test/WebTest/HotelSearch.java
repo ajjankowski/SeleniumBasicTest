@@ -60,11 +60,35 @@ public class HotelSearch {
         System.out.println(hotelNames.size());
         hotelNames.forEach(System.out::println);
 
-        Assert.assertEquals("Jumeirah Beach Hotel",hotelNames.get(0));
-        Assert.assertEquals("Oasis Beach Tower",hotelNames.get(1));
-        Assert.assertEquals("Rose Rayhaan Rotana",hotelNames.get(2));
-        Assert.assertEquals("Hyatt Regency Perth",hotelNames.get(3));
+        Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
+        Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
 
+
+        driver.quit();
+
+    }
+
+    @Test
+    public void searchHotelwithoutName() {
+        //False: visible test execution; True: Invisible tests execution
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(false);
+        WebDriver driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.get("http://www.kurs-selenium.pl/demo/");
+
+        driver.findElement(By.name("checkin")).sendKeys("17/04/2025");
+        driver.findElement(By.name("checkout")).sendKeys("20/04/2025");
+        driver.findElement(By.id("travellersInput")).click();
+        driver.findElement(By.id("childPlusBtn")).click();
+        driver.findElement(By.xpath("//button[text()=' Search']")).click();
+
+        String noResultHeading = driver.findElement(By.xpath("//div[@class='itemscontainer']")).getText();
+        Assert.assertEquals(noResultHeading, "No Results Found");
 
         driver.quit();
 
