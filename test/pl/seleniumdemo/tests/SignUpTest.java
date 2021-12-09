@@ -1,29 +1,28 @@
-package WebTest;
+package pl.seleniumdemo.tests;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+import pl.seleniumdemo.tests.BaseTest;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SignUpTest extends BaseTest{
+public class SignUpTest extends BaseTest {
 
     @Test
     public void signUpTest() {
         setup();
-        //Open Sigh Up
         driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream().filter(WebElement::isDisplayed)
                 .findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
 
-        //Generate random email
         int randomNumber = (int) (Math.random()*1000);
         String email = "test" + randomNumber + "@test.pl";
 
-        //Fill form
         String lastName = "Kowalski";
         String password = "passWord12!";
         driver.findElement(By.name("firstname")).sendKeys("Jan");
@@ -34,7 +33,6 @@ public class SignUpTest extends BaseTest{
         driver.findElement(By.name("confirmpassword")).sendKeys(password);
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
 
-        //Assert results
         String heading = driver.findElement(By.xpath("//h3[@class='RTL']")).getText();
         Assert.assertTrue(heading.contains(lastName));
         Assert.assertEquals(heading, "Hi, Jan Kowalski");
@@ -81,8 +79,6 @@ public class SignUpTest extends BaseTest{
         driver.findElement(By.name("confirmpassword")).sendKeys(password);
         driver.findElement(By.xpath("//button[@type='submit' and text()=' Sign Up']")).click();
 
-//        String noDataAlert = driver.findElement(By.xpath("//div[@class='alert alert-danger']")).getText();
-//        Assert.assertEquals(noDataAlert, "The Email field must contain a valid email address.");
         List<String> errors = driver.findElements(By.xpath("//div[@class='alert alert-danger']//p")).stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
@@ -90,6 +86,7 @@ public class SignUpTest extends BaseTest{
         softAssert.assertTrue(errors.contains("The Email field must contain a valid email address."));
         tearDown();
     }
+
 }
 
 
