@@ -1,16 +1,10 @@
 package WebTest;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class HotelSearchTest extends BaseTest {
@@ -18,7 +12,6 @@ public class HotelSearchTest extends BaseTest {
     @Test
     public void searchHotelTest() {
         setup();
-
         //City pick
         driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
         driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
@@ -62,7 +55,6 @@ public class HotelSearchTest extends BaseTest {
     @Test
     public void searchHotelWithoutNameTest() {
         setup();
-
         driver.findElement(By.name("checkin")).sendKeys("17/04/2025");
         driver.findElement(By.name("checkout")).sendKeys("20/04/2025");
         driver.findElement(By.id("travellersInput")).click();
