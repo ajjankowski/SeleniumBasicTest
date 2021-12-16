@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.testng.Assert;
 import pl.seleniumdemo.pages.HotelSearchPage;
 import pl.seleniumdemo.pages.ResultsPage;
+
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {

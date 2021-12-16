@@ -69,7 +69,7 @@ public class HotelSearchPage {
     }
 
     private void addTraveler(WebElement travelerBtn, int numberOfTravelers) {
-        for (int i=0; i< numberOfTravelers; i++) {
+        for (int i = 0; i < numberOfTravelers; i++) {
             travelerBtn.click();
         }
     }

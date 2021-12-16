@@ -14,7 +14,7 @@ public class SignUpTest extends BaseTest {
     @Test
     public void signUpTest() {
         setup();
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
 
         LoggedUserPage loggedUserPage = new HotelSearchPage(driver)
                 .openSignUpForm()
