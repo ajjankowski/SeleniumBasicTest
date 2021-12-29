@@ -1,11 +1,11 @@
-package pl.seleniumdemo.tests;
+package pl.selenium.tests;
 
 import org.junit.Test;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-import pl.seleniumdemo.pages.HotelSearchPage;
-import pl.seleniumdemo.pages.LoggedUserPage;
-import pl.seleniumdemo.pages.SignUpPage;
+import pl.selenium.pages.HotelSearchPage;
+import pl.selenium.pages.LoggedUserPage;
+import pl.selenium.pages.SignUpPage;
 
 import java.util.List;
 

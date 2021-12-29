@@ -1,9 +1,9 @@
-package pl.seleniumdemo.tests;
+package pl.selenium.tests;
 
 import org.junit.Test;
 import org.testng.Assert;
-import pl.seleniumdemo.pages.HotelSearchPage;
-import pl.seleniumdemo.pages.ResultsPage;
+import pl.selenium.pages.HotelSearchPage;
+import pl.selenium.pages.ResultsPage;
 
 import java.util.List;
 
