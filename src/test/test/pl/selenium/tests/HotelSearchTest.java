@@ -1,37 +1,52 @@
 package pl.selenium.tests;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.junit.Test;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import pl.selenium.pages.HotelSearchPage;
 import pl.selenium.pages.ResultsPage;
+import pl.selenium.utils.ExcelReader;
+import pl.selenium.utils.SeleniumHelper;
 
 import java.io.IOException;
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
 
+    // Create report with screenshots
     @Test
     public void searchHotelTest() throws IOException {
+        beforeSuite();
+        ExtentTest test = extentReports.createTest("Search Hotel Test");
         setup();
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        List<String> hotelNames = hotelSearchPage
-                .setCity("Dubai")
-                .setDates("17/04/2025", "20/04/2025")
-                .setTravellers(1, 2)
-                .performSearch().getHotelNames();
+        hotelSearchPage.setCity("Dubai");
+        test.log(Status.PASS, "Setting city done", SeleniumHelper.getScreenshot(driver));
+        hotelSearchPage.setDates("17/04/2025", "20/04/2025");
+        test.log(Status.PASS, "Setting dates done", SeleniumHelper.getScreenshot(driver));
+        hotelSearchPage.setTravellers(1, 2);
+        test.log(Status.PASS, "Setting travelers done", SeleniumHelper.getScreenshot(driver));
+        hotelSearchPage.performSearch().getHotelNames();
+        test.log(Status.PASS, "Performing search done", SeleniumHelper.getScreenshot(driver));
+        test.log(Status.PASS, "Screenshot", SeleniumHelper.getScreenshot(driver));
 
-        System.out.println(hotelNames.size());
-        hotelNames.forEach(System.out::println);
+        ResultsPage resultsPage = new ResultsPage(driver);
+        List<String> hotelNames = resultsPage.getHotelNames();
 
         Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
         Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
+        test.log(Status.PASS, "Assertions passed", SeleniumHelper.getScreenshot(driver));
+        afterSuite();
         tearDown();
     }
 
     @Test
     public void searchHotelWithoutNameTest() throws IOException {
+        beforeSuite();
         setup();
         ResultsPage resultsPage = new HotelSearchPage(driver)
                 .setDates("17/04/2025", "20/04/2025")
@@ -43,5 +58,26 @@ public class HotelSearchTest extends BaseTest {
         tearDown();
     }
 
+    @Test
+    public void searchHotelTestWithDataProvider() throws IOException {
+        setup();
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        List<String> hotelNames = hotelSearchPage
+                .setCity("Dubai")
+                .setDates("17/04/2025", "20/04/2025")
+                .setTravellers(1, 2)
+                .performSearch().getHotelNames();
+
+        Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
+        Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
+        tearDown();
+    }
+
+    @DataProvider
+    public Object[][] data() throws IOException {
+        return ExcelReader.readExcel("testData.xlsx");
+    }
 }
 
