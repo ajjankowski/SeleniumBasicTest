@@ -1,18 +1,21 @@
 package pl.selenium.tests;
 
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import pl.selenium.pages.HotelSearchPage;
 import pl.selenium.pages.LoggedUserPage;
 import pl.selenium.pages.SignUpPage;
+import pl.selenium.utils.SeleniumHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SignUpTest extends BaseTest {
 
     @Test
-    public void signUpTest() {
+    public void signUpTest() throws IOException {
         setup();
         int randomNumber = (int) (Math.random() * 1000);
 
@@ -32,7 +35,7 @@ public class SignUpTest extends BaseTest {
     }
 
     @Test
-    public void signUpEmptyFormTest() {
+    public void signUpEmptyFormTest() throws IOException {
         setup();
         SignUpPage signUpPage = new HotelSearchPage(driver).openSignUpForm();
         signUpPage.signUp();
@@ -50,7 +53,7 @@ public class SignUpTest extends BaseTest {
     }
 
     @Test
-    public void signUpInvalidEmailTest() {
+    public void signUpInvalidEmailTest() throws IOException {
         setup();
         SignUpPage signUpPage = new HotelSearchPage(driver)
                 .openSignUpForm()

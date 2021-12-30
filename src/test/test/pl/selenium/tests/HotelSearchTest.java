@@ -5,12 +5,13 @@ import org.testng.Assert;
 import pl.selenium.pages.HotelSearchPage;
 import pl.selenium.pages.ResultsPage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
 
     @Test
-    public void searchHotelTest() {
+    public void searchHotelTest() throws IOException {
         setup();
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         List<String> hotelNames = hotelSearchPage
@@ -30,7 +31,7 @@ public class HotelSearchTest extends BaseTest {
     }
 
     @Test
-    public void searchHotelWithoutNameTest() {
+    public void searchHotelWithoutNameTest() throws IOException {
         setup();
         ResultsPage resultsPage = new HotelSearchPage(driver)
                 .setDates("17/04/2025", "20/04/2025")
