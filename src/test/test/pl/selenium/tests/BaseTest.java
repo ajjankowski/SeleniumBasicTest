@@ -19,19 +19,18 @@ public class BaseTest {
     protected static ExtentReports extentReports;
 
     @BeforeClass
-    public static void beforeSuite() {
+    public static void beforeClass() {
         htmlReporter = new ExtentHtmlReporter("TestReport.html");
         extentReports = new ExtentReports();
         extentReports.attachReporter(htmlReporter);
     }
 
     @AfterClass
-    public static void afterSuite() {
+    public static void afterClass() {
         htmlReporter.flush();
         extentReports.flush();
     }
 
-    @BeforeMethod
     public void setup() throws IOException {
         driver = DriverFactory.getDriver("chrome");
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
@@ -39,7 +38,6 @@ public class BaseTest {
         driver.get("http://www.kurs-selenium.pl/demo/");
     }
 
-    @AfterMethod
     public void tearDown() {
         driver.quit();
     }

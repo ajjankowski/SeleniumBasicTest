@@ -18,7 +18,7 @@ public class HotelSearchTest extends BaseTest {
     // Create report with screenshots
     @Test
     public void searchHotelTest() throws IOException {
-        beforeSuite();
+        beforeClass();
         ExtentTest test = extentReports.createTest("Search Hotel Test");
         setup();
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -39,13 +39,13 @@ public class HotelSearchTest extends BaseTest {
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
         test.log(Status.PASS, "Assertions passed", SeleniumHelper.getScreenshot(driver));
-        afterSuite();
+        afterClass();
         tearDown();
     }
 
     @Test
     public void searchHotelWithoutNameTest() throws IOException {
-        beforeSuite();
+        beforeClass();
         setup();
         ResultsPage resultsPage = new HotelSearchPage(driver)
                 .setDates("17/04/2025", "20/04/2025")
