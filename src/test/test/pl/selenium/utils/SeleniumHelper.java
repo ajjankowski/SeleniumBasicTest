@@ -24,7 +24,7 @@ public class SeleniumHelper {
 
     public static void waitForNotEmptyList(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, 10l);
-        wait.until(browser -> browser.findElements(locator).size()>0);
+        wait.until(browser -> browser.findElements(locator).size() > 0);
     }
 
     public static MediaEntityModelProvider getScreenshot(WebDriver driver) throws IOException {
@@ -33,7 +33,7 @@ public class SeleniumHelper {
     }
 
     private static String takeScreenshot(WebDriver driver) throws IOException {
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File file = screenshot.getScreenshotAs(OutputType.FILE);
         String path = "src/test/resources/screenshots/screenshot" + randomNumber + ".png";

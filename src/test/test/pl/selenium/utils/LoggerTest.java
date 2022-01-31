@@ -14,5 +14,4 @@ public class LoggerTest {
         logger.fatal("Fatal");
         logger.trace("Trace");
     }
-
 }

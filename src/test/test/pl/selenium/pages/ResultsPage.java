@@ -29,5 +29,4 @@ public class ResultsPage {
     public String getHeadingText() {
         return resultHeading.getText();
     }
-
 }

@@ -4,7 +4,9 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import pl.selenium.utils.DriverFactory;
 
 import java.io.IOException;
@@ -31,9 +33,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() throws IOException {
-//        WebDriverManager.chromedriver().setup();
-//        ChromeOptions options = new ChromeOptions();
-//        options.setHeadless(true);
         driver = DriverFactory.getDriver("chrome");
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
         driver.manage().window().maximize();

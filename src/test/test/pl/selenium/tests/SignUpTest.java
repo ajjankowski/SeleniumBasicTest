@@ -1,13 +1,11 @@
 package pl.selenium.tests;
 
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import pl.selenium.pages.HotelSearchPage;
 import pl.selenium.pages.LoggedUserPage;
 import pl.selenium.pages.SignUpPage;
-import pl.selenium.utils.SeleniumHelper;
 
 import java.io.IOException;
 import java.util.List;
@@ -68,7 +66,6 @@ public class SignUpTest extends BaseTest {
         Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
         tearDown();
     }
-
 }
 
 

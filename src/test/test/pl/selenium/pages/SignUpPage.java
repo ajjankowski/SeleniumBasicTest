@@ -38,7 +38,7 @@ public class SignUpPage {
 
     private WebDriver driver;
 
-    public SignUpPage (WebDriver driver) {
+    public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -54,8 +54,8 @@ public class SignUpPage {
     }
 
     public SignUpPage setPhone(String phone) {
-       phoneInput.sendKeys(phone);
-       return this;
+        phoneInput.sendKeys(phone);
+        return this;
     }
 
     public SignUpPage setEmail(String email) {
@@ -74,15 +74,14 @@ public class SignUpPage {
     }
 
     public LoggedUserPage signUp() {
-       signUpButton.click();
-       return new LoggedUserPage(driver);
+        signUpButton.click();
+        return new LoggedUserPage(driver);
     }
 
     public List<String> getErrors() {
         SeleniumHelper.waitForNotEmptyList(driver, By.xpath("//div[@class='alert alert-danger']//p"));
-        return  errors.stream()
+        return errors.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-
 }
