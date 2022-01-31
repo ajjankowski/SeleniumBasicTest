@@ -13,17 +13,17 @@ import java.io.IOException;
 public class SeleniumHelper {
 
     public static void waitForElementToExist(WebDriver driver, By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10l);
+        WebDriverWait wait = new WebDriverWait(driver, 10L);
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public static void waitForElementToBeVisible(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10l);
+        WebDriverWait wait = new WebDriverWait(driver, 10L);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForNotEmptyList(WebDriver driver, By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, 10l);
+        WebDriverWait wait = new WebDriverWait(driver, 10L);
         wait.until(browser -> browser.findElements(locator).size() > 0);
     }
 
