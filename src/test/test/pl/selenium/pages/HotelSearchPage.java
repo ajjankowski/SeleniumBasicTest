@@ -98,5 +98,4 @@ public class HotelSearchPage {
         signUpLink.get(1).click();
         return new SignUpPage(driver);
     }
-
 }

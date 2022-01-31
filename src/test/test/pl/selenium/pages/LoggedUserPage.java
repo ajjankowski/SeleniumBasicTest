@@ -22,5 +22,4 @@ public class LoggedUserPage {
         SeleniumHelper.waitForElementToBeVisible(driver, heading);
         return heading.getText();
     }
-
 }
